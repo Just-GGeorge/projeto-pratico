@@ -1,6 +1,8 @@
 # Projeto-pratico
  Projeto prático PROCESSO SELETIVO SIMPLIFICADO Nº 002/2025/ SEPLAG
 
+github: https://github.com/Just-GGeorge/projeto-pratico
+
 Candidato: Guilherme George Oliveira da Silva
 
 email: guilhermegeorge06@gmail.com
