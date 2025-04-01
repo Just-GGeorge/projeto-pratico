@@ -13,11 +13,12 @@ Este projeto é um sistema web desenvolvido em **Java + Spring Boot** com persis
 
 ## 🔧 Tecnologias Utilizadas
 
-- Java 17
-- Spring com Maven
-- PostgreSQL
-- MinIO (armazenamento de fotos)
-- JWT (JSON Web Token)
+- Java 21  
+- Spring Boot 3.4.4  
+- Maven  
+- PostgreSQL 16+  
+- MinIO (Java SDK 8.4.4)  
+- JWT (JJWT 0.9.1)  
 - Docker 
 
 ## 🚀 Como Executar o Projeto com Docker
@@ -271,3 +272,35 @@ Content-Type: application/json
 DELETE /lotacoes/{id}
 ```
 
+## 🧾 Dados Iniciais no Projeto
+
+As tabelas e registros são inseridos automaticamente via `initdb/script.sql`:
+
+| Tabela                | Registros |
+|-----------------------|-----------|
+| cidade                | 2         |
+| endereco              | 2         |
+| unidade               | 2         |
+| pessoa                | 20        |
+| pessoa_endereco       | 20        |
+| servidor_efetivo      | 10        |
+| servidor_temporario   | 10        |
+| lotacao               | 20        |
+
+---
+
+## 📦 Dependências e Versões (pom.xml)
+
+| Dependência                    | Versão     |
+|-------------------------------|------------|
+| spring-boot-starter-web       | 3.4.4      |
+| spring-boot-starter-data-jpa  | 3.4.4      |
+| spring-boot-starter-security  | 3.4.4      |
+| postgresql                    | 42.7.5     |
+| jjwt                          | 0.9.1      |
+| jakarta.servlet-api           | 6.0.0+     |
+| jaxb-api                      | 2.3.1      |
+| minio                         | 8.4.4      |
+| spring-boot-devtools          | 3.4.4      |
+
+---
