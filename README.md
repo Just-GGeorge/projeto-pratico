@@ -77,14 +77,15 @@ Content-Type: application/json
 ```
 ### Exemplificado logo abaixo, passar o token para todas chamadas da API com exceção dos endpoint Registro e Login
 
-![image](https://github.com/user-attachments/assets/bdbbcfdc-581f-47b7-acbc-35f73229b801)
+![image](https://github.com/user-attachments/assets/14fdbc6a-a232-4454-ae7c-cb49309539e6)
 
 
 ## Endpoints Relevantes
 
 Todos CRUDs foram implementados para cada tabela do projeto
 
-![image](https://github.com/user-attachments/assets/83c2eef4-bc09-459b-814c-a45309f15113)
+![image](https://github.com/user-attachments/assets/7a43c67e-aab4-4604-846c-eb15c12d1d34)
+
 
 
 ### Adicionar Fotos
