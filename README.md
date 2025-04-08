@@ -79,10 +79,9 @@ Content-Type: application/json
 ### Atualizar token
 
 ```http
-POST http://localhost:8080/auth/login
+POST http://localhost:8080/auth/refresh
 Content-Type: application/json
 Authorization: Bearer <seu_token_jwt_atual>
-http://localhost:8085/auth/refresh
 
 ```
 
