@@ -13,11 +13,12 @@ Este projeto é um sistema web desenvolvido em **Java + Spring Boot** com persis
 
 ## 🔧 Tecnologias Utilizadas
 
-- Java 17
-- Spring com Maven
-- PostgreSQL
-- MinIO (armazenamento de fotos)
-- JWT (JSON Web Token)
+- Java 21  
+- Spring Boot 3.4.4  
+- Maven  
+- PostgreSQL 16+  
+- MinIO (Java SDK 8.4.4)  
+- JWT (JJWT 0.9.1)  
 - Docker 
 
 ## 🚀 Como Executar o Projeto com Docker
@@ -90,14 +91,15 @@ http://localhost:8085/auth/refresh
 
 ### Exemplificado logo abaixo, passar o token para todas chamadas da API com exceção dos endpoint Registro e Login
 
-![image](https://github.com/user-attachments/assets/bdbbcfdc-581f-47b7-acbc-35f73229b801)
+![image](https://github.com/user-attachments/assets/14fdbc6a-a232-4454-ae7c-cb49309539e6)
 
 
 ## Endpoints Relevantes
 
 Todos CRUDs foram implementados para cada tabela do projeto
 
-![image](https://github.com/user-attachments/assets/83c2eef4-bc09-459b-814c-a45309f15113)
+![image](https://github.com/user-attachments/assets/7a43c67e-aab4-4604-846c-eb15c12d1d34)
+
 
 
 ### Adicionar Fotos
@@ -287,3 +289,35 @@ Content-Type: application/json
 DELETE /lotacoes/{id}
 ```
 
+## 🧾 Dados Iniciais no Projeto
+
+As tabelas e registros são inseridos automaticamente via `initdb/script.sql`:
+
+| Tabela                | Registros |
+|-----------------------|-----------|
+| cidade                | 2         |
+| endereco              | 2         |
+| unidade               | 2         |
+| pessoa                | 20        |
+| pessoa_endereco       | 20        |
+| servidor_efetivo      | 10        |
+| servidor_temporario   | 10        |
+| lotacao               | 20        |
+
+---
+
+## 📦 Dependências e Versões (pom.xml)
+
+| Dependência                    | Versão     |
+|-------------------------------|------------|
+| spring-boot-starter-web       | 3.4.4      |
+| spring-boot-starter-data-jpa  | 3.4.4      |
+| spring-boot-starter-security  | 3.4.4      |
+| postgresql                    | 42.7.5     |
+| jjwt                          | 0.9.1      |
+| jakarta.servlet-api           | 6.0.0+     |
+| jaxb-api                      | 2.3.1      |
+| minio                         | 8.4.4      |
+| spring-boot-devtools          | 3.4.4      |
+
+---
