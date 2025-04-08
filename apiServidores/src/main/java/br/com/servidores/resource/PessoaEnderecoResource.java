@@ -7,6 +7,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 @RestController
@@ -20,14 +22,14 @@ public class PessoaEnderecoResource {
     }
 
     @GetMapping
-    public List<PessoaEndereco> listarTodos() {
-        return service.listarTodos();
+    public Page<PessoaEndereco> listarTodos(Pageable pageable) {
+        return service.listarTodos(pageable);
     }
 
     @GetMapping("/{pesId}")
     public ResponseEntity<?> buscarPorPessoa(@PathVariable Long pesId) {
         try {
-            return ResponseEntity.ok(service.buscarPorPessoaId(pesId));
+            return ResponseEntity.ok(service.buscarPorPessoaId(null, pesId));
         } catch (EntityNotFoundException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -45,7 +47,7 @@ public class PessoaEnderecoResource {
     @DeleteMapping("/{pesId}")
     public ResponseEntity<?> deletarPorPessoa(@PathVariable Long pesId) {
         try {
-            service.deletarPorPessoaId(pesId);
+            service.deletarPorPessoaId(null, pesId);
             return ResponseEntity.ok().build();
         } catch (EntityNotFoundException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

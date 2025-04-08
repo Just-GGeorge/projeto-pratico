@@ -6,6 +6,9 @@ import br.com.servidores.service.UnidadeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -20,8 +23,8 @@ public class UnidadeResource {
     }
 
     @GetMapping
-    public List<Unidade> listar() {
-        return unidadeService.listarTodos();
+    public Page<Unidade> listar(Pageable pageable) {
+        return unidadeService.listarTodos(pageable);
     }
 
     @GetMapping("/{id}")

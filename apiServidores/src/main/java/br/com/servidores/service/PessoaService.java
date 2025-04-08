@@ -6,7 +6,8 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 @Service
 public class PessoaService {
@@ -17,8 +18,8 @@ public class PessoaService {
         this.repository = repository;
     }
 
-    public List<Pessoa> listarTodos() {
-        return repository.findAll();
+    public Page<Pessoa> listarTodos(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
     public Pessoa buscarPorId(Long id) {

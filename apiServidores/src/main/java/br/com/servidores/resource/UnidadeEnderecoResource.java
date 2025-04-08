@@ -7,6 +7,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import java.util.List;
 
 @RestController
@@ -20,8 +23,8 @@ public class UnidadeEnderecoResource {
     }
 
     @GetMapping
-    public List<UnidadeEndereco> listarTodos() {
-        return service.listarTodos();
+    public Page<UnidadeEndereco> listarTodos(Pageable pageable) {
+        return service.listarTodos(pageable);
     }
 
     @GetMapping("/{unidId}/{endId}")

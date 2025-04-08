@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 @RestController
 @RequestMapping("/lotacoes")
@@ -19,8 +21,8 @@ public class LotacaoResource {
     }
 
     @GetMapping
-    public List<Lotacao> listarTodos() {
-        return lotacaoService.listarTodos();
+    public Page<Lotacao> listarTodos(Pageable pageable) {
+        return lotacaoService.listarTodos(pageable);
     }
 
     @GetMapping("/{id}")

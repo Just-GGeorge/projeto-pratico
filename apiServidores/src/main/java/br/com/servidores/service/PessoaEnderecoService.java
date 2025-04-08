@@ -6,6 +6,8 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 @Service
@@ -17,12 +19,12 @@ public class PessoaEnderecoService {
         this.repository = repository;
     }
 
-    public List<PessoaEndereco> listarTodos() {
-        return repository.findAll();
+    public Page<PessoaEndereco> listarTodos(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
-    public List<PessoaEndereco> buscarPorPessoaId(Long pesId) {
-        List<PessoaEndereco> lista = repository.findAllByPessoaPesId(pesId);
+    public Page<PessoaEndereco> buscarPorPessoaId(Pageable pageable, Long pesId) {
+    	Page<PessoaEndereco> lista = repository.findAllByPessoaPesId(pageable,pesId);
         if (lista.isEmpty()) {
             throw new EntityNotFoundException("Nenhum endereço encontrado para a pessoa com ID " + pesId);
         }
@@ -37,8 +39,8 @@ public class PessoaEnderecoService {
         }
     }
 
-    public void deletarPorPessoaId(Long pesId) {
-        List<PessoaEndereco> lista = buscarPorPessoaId(pesId);
+    public void deletarPorPessoaId(Pageable pageable,Long pesId) {
+    	Page<PessoaEndereco> lista = buscarPorPessoaId(pageable, pesId);
         repository.deleteAll(lista);
     }
 }

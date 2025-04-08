@@ -9,23 +9,26 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 
 public interface ServidorEfetivoRepository extends JpaRepository<ServidorEfetivo, Long> {
-	@Query(value = """
-		    SELECT 
-		        p.pes_nome AS nome,
-		        CAST(EXTRACT(YEAR FROM AGE(CURRENT_DATE, p.pes_data_nascimento)) AS INTEGER) AS idade,
-		        u.unid_nome AS unidade,
-		        fp.fp_hash AS linkFoto
-		    FROM servidor_efetivo se
-		    JOIN pessoa p ON p.pes_id = se.pes_id
-		    JOIN lotacao l ON l.pes_id = p.pes_id
-		    JOIN unidade u ON u.unid_id = l.unid_id
-		    LEFT JOIN foto_pessoa fp ON fp.pes_id = p.pes_id
-		    WHERE u.unid_id = :unidadeId
-		""", nativeQuery = true)
-		List<ServidorEfetivoDTO> findServidoresEfetivosPorUnidade(@Param("unidadeId") Long unidadeId);
+	@Query("""
+		    SELECT new br.com.servidores.dto.ServidorEfetivoDTO(
+		        p.pesNome,
+		        p.pesDataNascimento,
+		        u.unidNome,
+		        fp.hash
+		    )
+		    FROM ServidorEfetivo se
+		    JOIN Pessoa p ON se.pessoa.pesId = p.pesId
+		    JOIN Lotacao l ON p.pesId = l.pessoa.pesId
+		    JOIN Unidade u ON l.unidade.unidId = u.unidId
+		    LEFT JOIN FotoPessoa fp ON fp.pessoa.pesId = p.pesId
+		    WHERE u.unidId = :unidadeId
+		""")
+		Page<ServidorEfetivoDTO> findServidoresEfetivosPorUnidade(Pageable pageable, @Param("unidadeId") Long unidadeId);
 
 	@Query(value = """
 		    SELECT new br.com.servidores.dto.EnderecoFuncionalDTO(
@@ -47,6 +50,6 @@ public interface ServidorEfetivoRepository extends JpaRepository<ServidorEfetivo
 		    JOIN Cidade c ON e.cidade.cidId = c.cidId
 		    WHERE LOWER(p.pesNome) LIKE LOWER(CONCAT('%', :nome, '%'))
 		""")
-		List<EnderecoFuncionalDTO> buscarEnderecoFuncionalPorNomeServidor(@Param("nome") String nome);
+	Page<EnderecoFuncionalDTO> buscarEnderecoFuncionalPorNomeServidor(Pageable pageable, @Param("nome") String nome);
    //
 }

@@ -2,6 +2,7 @@ package br.com.servidores.security;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
@@ -23,7 +24,7 @@ public class JwtAuthEntryPoint implements AuthenticationEntryPoint {
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 
         PrintWriter writer = response.getWriter();
-        writer.write("{\"error\": \"Token inválido, expirado ou não fornecido.\"}");
+        writer.write("{\"error\": \"Acesso não autorizado. Faça login para continuar.\"}");
         writer.flush();
     }
 }

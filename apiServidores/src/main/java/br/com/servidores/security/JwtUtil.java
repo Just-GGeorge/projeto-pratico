@@ -26,6 +26,18 @@ public class JwtUtil {
                 .compact();
     }
 
+    public boolean validateToken(String token) {
+        try {
+            Jwts.parser()
+                .setSigningKey(secret)
+                .parseClaimsJws(token);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }

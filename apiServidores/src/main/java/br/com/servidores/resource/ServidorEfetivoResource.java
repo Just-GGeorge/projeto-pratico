@@ -4,6 +4,9 @@ import br.com.servidores.dto.EnderecoFuncionalDTO;
 import br.com.servidores.dto.ServidorEfetivoDTO;
 import br.com.servidores.model.ServidorEfetivo;
 import br.com.servidores.service.ServidorEfetivoService;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,18 +23,18 @@ public class ServidorEfetivoResource {
     }
 
     @GetMapping("/unidade/{unidId}")
-    public List<ServidorEfetivoDTO> buscarPorUnidade(@PathVariable Long unidId) {
-        return servidorEfetivoService.buscarPorUnidade(unidId);
+    public Page<ServidorEfetivoDTO> buscarPorUnidade(Pageable pageable,@PathVariable Long unidId) {
+        return servidorEfetivoService.buscarPorUnidade(pageable,unidId);
     }
     
     @GetMapping("/endereco-funcional")
-    public List<EnderecoFuncionalDTO> buscarEnderecoFuncional(@RequestParam("nome") String nome) {
-        return servidorEfetivoService.buscarEnderecoFuncionalPorNome(nome);
+    public Page<EnderecoFuncionalDTO> buscarEnderecoFuncional(Pageable pageable, @RequestParam("nome") String nome) {
+        return servidorEfetivoService.buscarEnderecoFuncionalPorNome(pageable, nome);
     }
 
     @GetMapping
-    public List<ServidorEfetivo> listarTodos() {
-        return servidorEfetivoService.listarTodos();
+    public Page<ServidorEfetivo> listarTodos(Pageable pageable) {
+        return servidorEfetivoService.listarTodos(pageable);
     }
 
     @GetMapping("/{id}")

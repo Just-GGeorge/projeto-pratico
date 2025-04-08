@@ -7,6 +7,8 @@ import br.com.servidores.model.ServidorEfetivo;
 import br.com.servidores.repository.PessoaRepository;
 import br.com.servidores.repository.ServidorEfetivoRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,8 +22,8 @@ public class ServidorEfetivoService {
     private final PessoaRepository pessoaRepository;
 
 
-    public List<EnderecoFuncionalDTO> buscarEnderecoFuncionalPorNome(String nome) {
-        return servidorEfetivoRepository.buscarEnderecoFuncionalPorNomeServidor(nome);
+    public Page<EnderecoFuncionalDTO> buscarEnderecoFuncionalPorNome(Pageable pageable, String nome) {
+        return servidorEfetivoRepository.buscarEnderecoFuncionalPorNomeServidor(pageable,nome);
     }
     public ServidorEfetivoService(ServidorEfetivoRepository servidorEfetivoRepository, MinioService minioService, PessoaRepository pessoaRepository) {
         this.servidorEfetivoRepository = servidorEfetivoRepository;
@@ -29,8 +31,8 @@ public class ServidorEfetivoService {
         this.pessoaRepository = pessoaRepository;
     }
 
-    public List<ServidorEfetivoDTO> buscarPorUnidade(Long unidId) {
-        List<ServidorEfetivoDTO> lista = servidorEfetivoRepository.findServidoresEfetivosPorUnidade(unidId);
+    public Page<ServidorEfetivoDTO> buscarPorUnidade(Pageable pageable,Long unidId) {
+    	Page<ServidorEfetivoDTO> lista = servidorEfetivoRepository.findServidoresEfetivosPorUnidade(pageable, unidId);
 
         // Atualiza os links da foto
         lista.forEach(dto -> {
@@ -46,8 +48,8 @@ public class ServidorEfetivoService {
 
         return lista;
     }
-    public List<ServidorEfetivo> listarTodos() {
-        return servidorEfetivoRepository.findAll();
+    public Page<ServidorEfetivo> listarTodos(Pageable pageable) {
+        return servidorEfetivoRepository.findAll(pageable);
     }
 
     public Optional<ServidorEfetivo> buscarPorId(Long id) {

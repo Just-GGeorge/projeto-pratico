@@ -1,5 +1,8 @@
 package br.com.servidores.dto;
 
+import java.time.LocalDate;
+import java.time.Period;
+
 public class ServidorEfetivoDTO {
 
     private String nome;
@@ -7,9 +10,9 @@ public class ServidorEfetivoDTO {
     private String unidade;
     private String linkFoto;
 
-    public ServidorEfetivoDTO(String nome, Integer idade, String unidade, String linkFoto) {
+    public ServidorEfetivoDTO(String nome, LocalDate dataNascimento, String unidade, String linkFoto) {
         this.nome = nome;
-        this.idade = idade;
+        this.idade = Period.between(dataNascimento, LocalDate.now()).getYears(); // Calcular idade
         this.unidade = unidade;
         this.linkFoto = linkFoto;
     }

@@ -74,6 +74,20 @@ Content-Type: application/json
   "password": "minhaSenha123"
 }
 ```
+
+### Atualizar token
+
+```http
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+Authorization: Bearer <seu_token_jwt_atual>
+http://localhost:8085/auth/refresh
+
+```
+
+
+
+
 ### Exemplificado logo abaixo, passar o token para todas chamadas da API com exceção dos endpoint Registro e Login
 
 ![image](https://github.com/user-attachments/assets/bdbbcfdc-581f-47b7-acbc-35f73229b801)
@@ -100,12 +114,14 @@ file: <arquivo>
 
 - `/auth/register`: Registro
 - `/auth/login`: Login (retorna token JWT)
+- `/auth/refresh`: Login (retorna token JWT)
 
-### Servidores efetivos lotados em determinada unidade
+
+### Servidores efetivos lotados em determinada unidade (opção de parametrizar paginação ?page=0&size=10)
 ```http
 GET /servidores-efetivos/unidade/{id}
 ```
-### Consultar o endereço funcional  a partir de uma parte do nome do servidor efetivo.
+### Consultar o endereço funcional  a partir de uma parte do nome do servidor efetivo. (opção de parametrizar paginação ?page=0&size=10)
 ```http
 GET /servidores-efetivos/endereco-funcional?nome={parte_nome}
 ```

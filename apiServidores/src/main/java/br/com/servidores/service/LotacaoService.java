@@ -6,6 +6,8 @@ import jakarta.persistence.EntityExistsException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,8 +20,8 @@ public class LotacaoService {
         this.lotacaoRepository = lotacaoRepository;
     }
 
-    public List<Lotacao> listarTodos() {
-        return lotacaoRepository.findAll();
+    public Page<Lotacao> listarTodos(Pageable pageable) {
+        return lotacaoRepository.findAll(pageable);
     }
 
     public Optional<Lotacao> buscarPorId(Long id) {
